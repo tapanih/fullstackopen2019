@@ -1,0 +1,35 @@
+title 0.4: uusi muistiinpano
+
+note over selain:
+käyttäjä painaa lomakkeen nappia
+ja selain lähettää syötetyn datan palvelimelle
+end note
+
+selain->palvelin: HTTP POST /new_note [note : sisältö]
+
+note over palvelin: 
+Palvelin luo uuden muistiinpanon,
+lisää sen taulukkoon 
+ja lähettää uudelleenohjauksen.
+end note
+
+palvelin-->selain: 302 Found /notes
+selain->palvelin: HTTP GET /notes
+palvelin-->selain: HTML-koodi
+selain->palvelin: HTTP GET /main.css
+palvelin-->selain: main.css
+selain->palvelin: HTTP GET /main.js
+palvelin-->selain: main.js
+
+note over selain:
+selain suorittaa js-koodin
+joka pyytää JSON-datan palvelimelta
+end note
+
+selain->palvelin: HTTP GET /data.json
+palvelin-->selain: data.json
+
+note over selain:
+selain suorittaa tapahtumankäsittelijän
+joka renderöi muistiinpanot näytölle
+end note

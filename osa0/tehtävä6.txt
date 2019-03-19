@@ -1,0 +1,19 @@
+title: 0.6: Uusi muistiinpano
+
+note over selain:
+Käyttäjä painaa lomakkeen nappia
+ja selain suorittaa tapahtumankäsittelijän,
+joka luo muistiinpanon, lisää sen taulukkoon,
+piirtää muistiinpanot näytölle 
+ja lähettää uuden muistiinpanon palvelimelle 
+end note:
+
+selain->palvelin: HTTP POST /new_note_spa [{content: "", date: ""}]
+
+note over palvelin: 
+Palvelin luo uuden muistiinpanon,
+lisää sen taulukkoon ja vastaa
+pyynnön onnistuneen.
+end note
+
+palvelin-->selain: 201 Created
