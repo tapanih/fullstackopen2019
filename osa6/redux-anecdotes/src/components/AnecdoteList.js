@@ -1,23 +1,25 @@
 import React from 'react'
 import { voteById } from '../reducers/anecdoteReducer'
+import { showNotification } from '../reducers/notificationReducer'
 
 const AnecdoteList = (props) => {
-  const anecdotes = props.store.getState()
+  const state = props.store.getState()
 
-  const vote = (id) => {
-    props.store.dispatch(voteById(id))
+  const vote = (anecdote) => {
+    props.store.dispatch(voteById(anecdote.id))
+    props.store.dispatch(showNotification(`you voted '${anecdote.content}'`))
   }
 
   return (
     <>
-      {anecdotes.map(anecdote =>
+      {state.anecdotes.map(anecdote =>
         <div key={anecdote.id}>
           <div>
             {anecdote.content}
           </div>
           <div>
             has {anecdote.votes}
-            <button onClick={() => vote(anecdote.id)}>vote</button>
+            <button onClick={() => vote(anecdote)}>vote</button>
           </div>
         </div>
       )}
