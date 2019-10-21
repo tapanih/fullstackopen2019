@@ -7,7 +7,7 @@ const AnecdoteList = (props) => {
 
   const vote = (anecdote) => {
     props.store.dispatch(voteById(anecdote.id))
-    props.store.dispatch(showNotification(`you voted '${anecdote.content}'`))
+    props.store.dispatch(showNotification(props.store.dispatch, `you voted '${anecdote.content}'`))
   }
 
   return (

@@ -1,7 +1,17 @@
-export const showNotification = (message) => {
+export const showNotification = (dispatch, message) => {
+  setTimeout(() => {
+    dispatch(hideNotification())
+  }, 5000)
   return {
     type: 'SHOW',
     data: { message }
+  }
+}
+
+export const hideNotification = () => {
+  return {
+    type: 'HIDE',
+    data: ''
   }
 }
 
