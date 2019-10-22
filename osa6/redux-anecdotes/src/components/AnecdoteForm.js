@@ -9,7 +9,7 @@ const AnecdoteForm = (props) => {
     const content = event.target.anecdote.value
     event.target.anecdote.value = ''
     props.createAnecdote(content)
-    props.showNotification(`you added '${content}'`)
+    props.showNotification(`you added '${content}'`, 5)
   }
 
   return (
@@ -23,15 +23,9 @@ const AnecdoteForm = (props) => {
   )
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    createAnecdote: value => {
-      dispatch(createAnecdote(value))
-    },
-    showNotification: value => {
-      dispatch(showNotification(dispatch, value))
-    },
-  }
+const mapDispatchToProps = {
+  createAnecdote,
+  showNotification,
 }
 
 const ConnectedAnecdoteForm = connect(null, mapDispatchToProps)(AnecdoteForm)

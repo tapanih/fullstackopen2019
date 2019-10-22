@@ -7,7 +7,7 @@ const AnecdoteList = (props) => {
 
   const vote = (anecdote) => {
     props.voteAnecdote(anecdote)
-    props.showNotification(`you voted '${anecdote.content}'`)
+    props.showNotification(`you voted '${anecdote.content}'`, 5)
   }
 
   return (
@@ -38,15 +38,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    voteAnecdote: value => {
-      dispatch(voteAnecdote(value))
-    },
-    showNotification: value => {
-      dispatch(showNotification(dispatch, value))
-    },
-  }
+const mapDispatchToProps = {
+  voteAnecdote,
+  showNotification,
 }
 
 const ConnectedAnecdoteList = connect(mapStateToProps, mapDispatchToProps)(AnecdoteList)
