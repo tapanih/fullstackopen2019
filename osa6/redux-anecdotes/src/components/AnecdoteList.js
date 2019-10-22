@@ -12,7 +12,9 @@ const AnecdoteList = (props) => {
 
   return (
     <>
-      {state.anecdotes.map(anecdote =>
+      {state.anecdotes
+      .filter(anecdote => anecdote.content.toLowerCase().includes(state.filter.toLowerCase()))
+      .map(anecdote =>
         <div key={anecdote.id}>
           <div>
             {anecdote.content}
