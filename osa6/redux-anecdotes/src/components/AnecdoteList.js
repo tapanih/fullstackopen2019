@@ -2,11 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { voteById } from '../reducers/anecdoteReducer'
 import { showNotification } from '../reducers/notificationReducer'
+import anecdoteService from '../services/anecdotes'
 
 const AnecdoteList = (props) => {
 
   const vote = (anecdote) => {
     props.voteById(anecdote.id)
+    anecdoteService.update({ ...anecdote, votes: anecdote.votes + 1 })
     props.showNotification(`you voted '${anecdote.content}'`)
   }
 

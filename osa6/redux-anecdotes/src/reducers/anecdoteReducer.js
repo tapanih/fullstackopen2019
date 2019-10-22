@@ -30,7 +30,8 @@ export const anecdoteReducer = (state = [], action) => {
     case 'NEW_ANECDOTE':
       return state.concat(action.data)
     case 'INIT_ANECDOTES':
-      return action.data
+      state = action.data.sort((a, b) => b.votes - a.votes)
+      return state
     default: return state
   }
 }
