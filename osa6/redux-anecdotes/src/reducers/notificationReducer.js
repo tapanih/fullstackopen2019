@@ -1,5 +1,8 @@
+let timeoutHandle
+
 export const showNotification = (dispatch, message) => {
-  setTimeout(() => {
+  clearTimeout(timeoutHandle)
+  timeoutHandle = setTimeout(() => {
     dispatch(hideNotification())
   }, 5000)
   return {
