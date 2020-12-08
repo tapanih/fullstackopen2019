@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import Text from './Text';
 
 const RepositoryItem = ({ item }) => {
-  return(
+  return (
     <View>
       <Text>Full name: {item.fullName}</Text>
       <Text>Description: {item.description}</Text>
