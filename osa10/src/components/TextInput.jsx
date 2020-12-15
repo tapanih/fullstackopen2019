@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: theme.colors.grey,
     borderRadius: 5,
-    boxSizing: "border-box",
   }
 });
 

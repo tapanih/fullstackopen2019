@@ -7,7 +7,7 @@ const AppBarTab = ({ to, text }) => {
   return (
     <View style={{ marginRight: 10 }}>
     <Link to={to} component={TouchableOpacity}>
-      <Text fontWeight='bold' fontSize='heading' color='light'>
+      <Text fontWeight='bold' fontSize='subheading' color='light'>
         {text}
       </Text>
     </Link>
