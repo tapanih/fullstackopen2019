@@ -8,7 +8,7 @@ import theme from '../theme';
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    paddingTop: Constants.statusBarHeight,
+    paddingTop: Constants.statusBarHeight + 10,
     backgroundColor: theme.colors.dark,
     flexGrow: 0,
     paddingBottom: 10,
