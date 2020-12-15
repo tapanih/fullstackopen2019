@@ -1,9 +1,20 @@
 import ApolloClient from 'apollo-boost';
 import Constants from 'expo-constants';
 
-const createApolloClient = () => {
+const createApolloClient = (authStorage) => {
   return new ApolloClient({
-    // Replace the IP address part with your own IP address!
+    request: async (operation) => {
+      try {
+        const accessToken = authStorage.getAccessToken();
+        operation.setContext({
+          headers: {
+            authorization: accessToken ? `Bearer ${accessToken}` : '',
+          },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
     uri: Constants.manifest.extra.apolloUri,
   });
 };
