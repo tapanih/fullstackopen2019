@@ -48,11 +48,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const Stat = ({ value, description }) => {
+const Stat = ({ value, description, testID }) => {
   value = value >= 1000 ? Math.round(value / 100) / 10 + "k" : value;
   return (
     <View style={{ flexGrow: 0 }}>
-      <Text style={{textAlign: 'center'}} fontWeight='bold'>{value}</Text>
+      <Text testID={testID} style={{textAlign: 'center'}} fontWeight='bold'>{value}</Text>
       <Text>{description}</Text>
     </View>
   );
@@ -69,16 +69,16 @@ const RepositoryItem = ({ item }) => {
           />
         </View>
         <View style={styles.descContainer}>
-          <Text style={styles.text} fontWeight="bold" fontSize="subheading">{item.fullName}</Text>
-          <Text style={styles.text} color="textSecondary">{item.description}</Text>
-          <Text style={styles.language}>{item.language}</Text>
+          <Text testID='fullName' style={styles.text} fontWeight="bold" fontSize="subheading">{item.fullName}</Text>
+          <Text testID='description' style={styles.text} color="textSecondary">{item.description}</Text>
+          <Text testID='language' style={styles.language}>{item.language}</Text>
         </View>
       </View>
       <View style={styles.statContainer}>
-        <Stat value={item.stargazersCount} description='Stars' />
-        <Stat value={item.forksCount} description='Forks'/>
-        <Stat value={item.reviewCount} description='Reviews'/>
-        <Stat value={item.ratingAverage} description='Rating'/>
+        <Stat testID='stargazersCount' value={item.stargazersCount} description='Stars' />
+        <Stat testID='forksCount' value={item.forksCount} description='Forks'/>
+        <Stat testID='reviewCount' value={item.reviewCount} description='Reviews'/>
+        <Stat testID='ratingAverage' value={item.ratingAverage} description='Rating'/>
       </View>
     </View>
   );
