@@ -1,9 +1,13 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import React, { useContext } from 'react';
+import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import Constants from 'expo-constants';
+import { useApolloClient } from '@apollo/react-hooks';
+import AuthStorageContext from '../contexts/AuthStorageContext';
 import AppBarTab from './AppBarTab';
-
 import theme from '../theme';
+import Text from './Text';
+import { useQuery } from '@apollo/react-hooks';
+import { GET_AUTHORIZED_USER } from '../graphql/queries';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,12 +21,33 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
-  return <View style={styles.container}>
-    <ScrollView horizontal>
-      <AppBarTab to="/" text="Repositories" />
-      <AppBarTab to="/login" text="Sign in" />
-    </ScrollView>
-  </View>;
+  const { data } = useQuery(GET_AUTHORIZED_USER);
+  const apolloClient = useApolloClient();
+  const authStorage = useContext(AuthStorageContext);
+
+  const handleLogout = async () => {
+    await authStorage.removeAccessToken();
+    apolloClient.resetStore();
+  };
+
+  return (
+    <View style={styles.container}>
+      <ScrollView horizontal>
+        <AppBarTab to="/" text="Repositories" />
+        {data && data.authorizedUser !== null ?
+          <View style={{ marginRight: 10 }}>
+            <TouchableOpacity onPress={handleLogout}>
+              <Text fontWeight='bold' fontSize='subheading' color='light'>
+                Sign out
+              </Text>
+            </TouchableOpacity>
+          </View>
+        : 
+          <AppBarTab to="/login" text="Sign in" />
+        }
+      </ScrollView>
+    </View>
+  );
 };
 
 export default AppBar;
