@@ -36,12 +36,24 @@ const styles = StyleSheet.create({
 const SignInForm = ({ onSubmit }) => {
   return (
   <View style={{ backgroundColor: theme.colors.light }}>
-    <FormikTextInput name="username" placeholder="Username" />
-    <FormikTextInput name="password" placeholder="Password" secureTextEntry />
-    <TouchableOpacity onPress={onSubmit} activeOpacity={0.4}>
+    <FormikTextInput testID='usernameField' name="username" placeholder="Username" />
+    <FormikTextInput testID='passwordField' name="password" placeholder="Password" secureTextEntry />
+    <TouchableOpacity testID='submitButton' onPress={onSubmit} activeOpacity={0.4}>
       <Text fontWeight="bold" fontSize="subheading" style={styles.button}>Sign in</Text>
     </TouchableOpacity>
   </View>
+  );
+};
+
+export const SignInContainer = ({ onSubmit }) => {
+  return (
+    <Formik 
+      initialValues={initialValues} 
+      onSubmit={onSubmit} 
+      validationSchema={validationSchema}
+    >
+      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+    </Formik>
   );
 };
 
@@ -60,15 +72,7 @@ const SignIn = () => {
     }
   };
 
-  return (
-    <Formik 
-      initialValues={initialValues} 
-      onSubmit={onSubmit} 
-      validationSchema={validationSchema}
-    >
-      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
-    </Formik>
-  );
+  return <SignInContainer onSubmit={onSubmit} />;
 };
 
 export default SignIn;
