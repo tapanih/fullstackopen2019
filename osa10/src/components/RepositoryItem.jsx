@@ -1,7 +1,8 @@
 import React from 'react';
-import { Image, View, StyleSheet } from 'react-native';
+import { Image, View, StyleSheet, TouchableOpacity } from 'react-native';
 import theme from '../theme';
 import Text from './Text';
+import * as Linking from 'expo-linking';
 
 const styles = StyleSheet.create({
   container: {
@@ -46,6 +47,18 @@ const styles = StyleSheet.create({
   text: {
     margin: 4,
   },
+  button: {
+    textAlign: 'center',
+    color: theme.colors.light,
+    backgroundColor: theme.colors.primary,
+    borderColor: theme.colors.primary,
+    margin: 6,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderWidth: 4,
+    borderRadius: 5,
+    padding: 8,
+  },
 });
 
 const Stat = ({ value, description, testID }) => {
@@ -58,7 +71,7 @@ const Stat = ({ value, description, testID }) => {
   );
 };
 
-const RepositoryItem = ({ item }) => {
+const RepositoryItem = ({ item, showGithubButton }) => {
   return (
     <View style={styles.container}>
       <View style={styles.infoContainer}>
@@ -80,6 +93,13 @@ const RepositoryItem = ({ item }) => {
         <Stat testID='reviewCount' value={item.reviewCount} description='Reviews'/>
         <Stat testID='ratingAverage' value={item.ratingAverage} description='Rating'/>
       </View>
+      {showGithubButton && 
+        <View>
+          <TouchableOpacity testID='submitButton' onPress={() => Linking.openURL(item.url)} activeOpacity={0.4}>
+            <Text fontWeight="bold" fontSize="subheading" style={styles.button}>View on GitHub</Text>
+          </TouchableOpacity>
+        </View>
+      }
     </View>
   );
 };
