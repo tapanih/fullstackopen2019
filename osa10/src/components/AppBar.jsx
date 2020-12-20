@@ -45,8 +45,11 @@ const AppBar = () => {
               </TouchableOpacity>
             </View>
           </>
-        : 
+        :
+        <> 
           <AppBarTab to="/login" text="Sign in" />
+          <AppBarTab to="/signup" text="Sign up" />
+        </>
         }
       </ScrollView>
     </View>
