@@ -7,6 +7,7 @@ import SignIn from './SignIn';
 
 import theme from '../theme';
 import RepositoryView from './RepositoryView';
+import CreateReview from './CreateReview';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,6 +27,9 @@ const Main = () => {
         </Route>
         <Route path="/login" exact>
           <SignIn />
+        </Route>
+        <Route path="/review" exact>
+          <CreateReview />
         </Route>
         <Route path="/:id" component={RepositoryView} />
         <Redirect to="/" />

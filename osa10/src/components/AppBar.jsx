@@ -35,13 +35,16 @@ const AppBar = () => {
       <ScrollView horizontal>
         <AppBarTab to="/" text="Repositories" />
         {data && data.authorizedUser !== null ?
-          <View style={{ marginRight: 10 }}>
-            <TouchableOpacity onPress={handleLogout}>
-              <Text fontWeight='bold' fontSize='subheading' color='light'>
-                Sign out
-              </Text>
-            </TouchableOpacity>
-          </View>
+          <>
+            <AppBarTab to="/review" text="Create a review" />
+            <View style={{ marginRight: 10 }}>
+              <TouchableOpacity onPress={handleLogout}>
+                <Text fontWeight='bold' fontSize='subheading' color='light'>
+                  Sign out
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </>
         : 
           <AppBarTab to="/login" text="Sign in" />
         }
