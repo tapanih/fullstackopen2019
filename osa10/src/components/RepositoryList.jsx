@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FlatList, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useHistory } from 'react-router-native';
 import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
+import RNPickerSelect from 'react-native-picker-select';
 
 const styles = StyleSheet.create({
   separator: {
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({ repositories, setVariables }) => {
   const history = useHistory();
   const repositoryNodes = repositories
   ? repositories.edges.map(edge => edge.node)
@@ -25,6 +26,16 @@ return (
         <RepositoryItem item={item} />
       </TouchableOpacity>
     }
+    ListHeaderComponent={
+      <RNPickerSelect
+        onValueChange={(value) => setVariables(value)}
+        items={[
+            { label: 'Latest Repositories', value: { orderBy: "CREATED_AT", orderDirection: "DESC" }},
+            { label: 'Highest rated repositories', value: { orderBy: "RATING_AVERAGE", orderDirection: "DESC" }},
+            { label: 'Lowest rated repositories', value: { orderBy: "RATING_AVERAGE", orderDirection: "ASC" }},
+        ]}
+      />
+    }
   />
 );
 };
@@ -32,9 +43,10 @@ return (
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
-  const { repositories } = useRepositories();
+  const [variables, setVariables] = useState({ orderBy: "CREATED_AT", orderDirection: "DESC" });
+  const { repositories } = useRepositories(variables);
 
-  return <RepositoryListContainer repositories={repositories} />;
+  return <RepositoryListContainer repositories={repositories} setVariables={setVariables} />;
 };
 
 export default RepositoryList;
