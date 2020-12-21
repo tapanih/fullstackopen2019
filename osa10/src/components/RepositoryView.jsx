@@ -1,17 +1,10 @@
 import React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList } from 'react-native';
 import { useParams } from 'react-router-native';
 import useRepository from '../hooks/useRepository';
 import RepositoryItem from './RepositoryItem';
 import ReviewItem from './ReviewItem';
-
-const styles = StyleSheet.create({
-  separator: {
-    height: 10,
-  },
-});
-
-const ItemSeparator = () => <View style={styles.separator} />;
+import ItemSeparator from './ItemSeparator';
 
 const RepositoryView = () => {
   const { id } = useParams();

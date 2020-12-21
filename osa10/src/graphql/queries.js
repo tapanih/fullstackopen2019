@@ -1,5 +1,5 @@
 import { gql } from 'apollo-boost';
-import { PAGE_INFO, REPOSITORY_INFO } from './fragments';
+import { PAGE_INFO, REPOSITORY_INFO, REVIEW_INFO } from './fragments';
 
 export const GET_REPOSITORIES = gql`
   query Repositories($first: Int, $after: String, $orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirection, $searchKeyword: String) {
@@ -19,12 +19,28 @@ export const GET_REPOSITORIES = gql`
 `;
 
 export const GET_AUTHORIZED_USER = gql`
-  query {
+  query getAuthorizedUser($includeReviews: Boolean = false) {
     authorizedUser {
       id
       username
+      reviews @include(if: $includeReviews) {
+        edges {
+          node {
+            ...ReviewInfo
+            repository {
+              fullName
+            }
+          }
+          cursor
+        }
+        pageInfo {
+          ...PageInfoFragment
+        }
+      }
     }
   }
+  ${REVIEW_INFO}
+  ${PAGE_INFO}
 `;
 
 export const GET_REPOSITORY = gql`
@@ -35,14 +51,7 @@ export const GET_REPOSITORY = gql`
       reviews(first: $first, after: $after) {
         edges {
           node {
-            id
-            text
-            rating
-            createdAt
-            user {
-              id
-              username
-            }
+            ...ReviewInfo
           }
         }
         pageInfo {
@@ -52,5 +61,6 @@ export const GET_REPOSITORY = gql`
     }
   }
   ${REPOSITORY_INFO}
+  ${REVIEW_INFO}
   ${PAGE_INFO}
 `;

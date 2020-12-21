@@ -37,6 +37,7 @@ const AppBar = () => {
         {data && data.authorizedUser !== null ?
           <>
             <AppBarTab to="/review" text="Create a review" />
+            <AppBarTab to="/myreviews" text="My reviews" />
             <View style={{ marginRight: 10 }}>
               <TouchableOpacity onPress={handleLogout}>
                 <Text fontWeight='bold' fontSize='subheading' color='light'>

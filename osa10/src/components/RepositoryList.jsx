@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { FlatList, View, TouchableOpacity } from 'react-native';
 import { useHistory } from 'react-router-native';
 import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 import RNPickerSelect from 'react-native-picker-select';
 import { Searchbar } from 'react-native-paper';
 import { useDebounce } from 'use-debounce/lib';
-
-const styles = StyleSheet.create({
-  separator: {
-    height: 10,
-  },
-});
+import ItemSeparator from './ItemSeparator';
 
 export const RepositoryListContainer = ({ repositories, variables, setVariables, searchQuery, setSearchQuery, onEndReach }) => {
   const history = useHistory();
@@ -54,8 +49,6 @@ return (
   />
 );
 };
-
-const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
   const [variables, setVariables] = useState({ first: 8, orderBy: "CREATED_AT", orderDirection: "DESC", searchKeyword: "" });
