@@ -13,3 +13,12 @@ export const REPOSITORY_INFO = gql`
     ownerAvatarUrl
   }
 `;
+
+export const PAGE_INFO = gql`
+  fragment PageInfoFragment on PageInfo {
+    endCursor
+    startCursor
+    totalCount
+    hasNextPage
+  }
+`;

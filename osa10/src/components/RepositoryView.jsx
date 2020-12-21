@@ -15,7 +15,11 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryView = () => {
   const { id } = useParams();
-  const { repository } = useRepository(id);
+  const { repository, fetchMore } = useRepository({ first: 3, id });
+
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   const item = repository ? repository : {};
   const reviews = item.reviews
@@ -34,6 +38,8 @@ const RepositoryView = () => {
           <ItemSeparator />
         </>
       }
+      onEndReached={onEndReach}
+      onEndReachedThreshold={0.5}
     />
   );
 };

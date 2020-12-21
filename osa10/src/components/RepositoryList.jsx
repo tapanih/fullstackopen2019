@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const RepositoryListContainer = ({ repositories, variables, setVariables, searchQuery, setSearchQuery }) => {
+export const RepositoryListContainer = ({ repositories, variables, setVariables, searchQuery, setSearchQuery, onEndReach }) => {
   const history = useHistory();
 
   const onChangeSearch = query => setSearchQuery(query);
@@ -40,7 +40,7 @@ return (
           value={searchQuery}
         />
         <RNPickerSelect
-          onValueChange={(value) => setVariables({ ...value, searchKeyword: variables.searchKeyword })}
+          onValueChange={(value) => setVariables({ ...variables, orderBy: value.orderBy, orderDirection: value.orderDirection })}
           items={[
               { label: 'Latest Repositories', value: { orderBy: "CREATED_AT", orderDirection: "DESC" }},
               { label: 'Highest rated repositories', value: { orderBy: "RATING_AVERAGE", orderDirection: "DESC" }},
@@ -49,6 +49,8 @@ return (
         />
       </View>
     }
+    onEndReached={onEndReach}
+    onEndReachedThreshold={0.5}
   />
 );
 };
@@ -56,12 +58,16 @@ return (
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
-  const [variables, setVariables] = useState({ orderBy: "CREATED_AT", orderDirection: "DESC", searchKeyword: "" });
-  const { repositories } = useRepositories(variables);
+  const [variables, setVariables] = useState({ first: 8, orderBy: "CREATED_AT", orderDirection: "DESC", searchKeyword: "" });
+  const { repositories, fetchMore } = useRepositories(variables);
   const [searchQuery, setSearchQuery] = React.useState('');
   const [searchKeyword] = useDebounce(searchQuery, 500);
 
   useEffect(() => setVariables({ ...variables, searchKeyword }), [searchKeyword]);
+
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   return <RepositoryListContainer
             repositories={repositories}
@@ -69,6 +75,7 @@ const RepositoryList = () => {
             setVariables={setVariables}
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
+            onEndReach={onEndReach}
         />;
 };
 
