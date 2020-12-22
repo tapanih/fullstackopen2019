@@ -28,10 +28,10 @@ export const GET_AUTHORIZED_USER = gql`
           node {
             ...ReviewInfo
             repository {
+              id
               fullName
             }
           }
-          cursor
         }
         pageInfo {
           ...PageInfoFragment
