@@ -1,8 +1,7 @@
 # Full Stack open CI/CD
+This repository is used for the CI/CD module of the Full stack open course.
 
-This repository is used for the CI/CD module of the Full stack open course
-
-Fork the repository to complete course exercises
+Solutions to exercises 11.21 and 11.22 can be found here: https://github.com/tapanih/social-news-site
 
 ## Commands
 
