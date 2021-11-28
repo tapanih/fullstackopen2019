@@ -1,0 +1,9 @@
+tapani@tapani-desktop:$ sudo docker start -i laughing_payne
+[sudo] password for tapani:
+root@365d4108e4df:/#
+root@365d4108e4df:/# apt-get update
+root@365d4108e4df:/# apt-get -y install nano
+root@365d4108e4df:/# nano /usr/src/app/index.js
+root@365d4108e4df:/# cat /usr/src/app/index.js
+console.log('Hello world')
+root@365d4108e4df:/# exit
