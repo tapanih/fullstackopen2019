@@ -1,3 +1,7 @@
+db = db.getSiblingDB('admin');
+db.auth("root", "example");
+db = db.getSiblingDB('the_database');
+
 db.createUser({
   user: 'the_username',
   pwd: 'the_password',
