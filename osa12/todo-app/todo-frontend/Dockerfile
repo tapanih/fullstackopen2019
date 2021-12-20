@@ -14,7 +14,8 @@ COPY --from=test-stage /usr/src/app /usr/src/app
 
 WORKDIR /usr/src/app
 
-ENV REACT_APP_BACKEND_URL=http://localhost:3000
+ARG REACT_APP_BACKEND_URL
+ENV REACT_APP_BACKEND_URL = ${REACT_APP_BACKEND_URL}
 
 RUN npm run build
 
