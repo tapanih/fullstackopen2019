@@ -1,0 +1,4 @@
+tapani@tapani-desktop: sudo docker container run -it ubuntu bash
+root@365d4108e4df:/# mkdir -p /usr/src/app
+root@365d4108e4df:/# touch /usr/src/app/index.js
+root@365d4108e4df:/# exit

@@ -1,0 +1,60 @@
+tapani@tapani-desktop: $ sudo docker container ls
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                     NAMES
+537df4802f84        mongo               "docker-entrypoint.s…"   24 hours ago        Up About an hour    0.0.0.0:3456->27017/tcp   todo-backend_mongo_1
+tapani@tapani-desktop: $ sudo docker exec -it todo-backend_mongo_1 bash
+root@537df4802f84:/#
+root@537df4802f84:/# mongo -u root -p example
+MongoDB shell version v5.0.4
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("47fc85e6-3c35-4bde-a273-79f457e321cf") }
+MongoDB server version: 5.0.4
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+	https://docs.mongodb.com/
+Questions? Try the MongoDB Developer Community Forums
+	https://community.mongodb.com
+---
+The server generated these startup warnings when booting:
+        2021-11-29T18:51:14.131+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs
+admin         0.000GB
+config        0.000GB
+local         0.000GB
+the_database  0.000GB
+> use the_database
+switched to db the_database
+> show collections
+todos
+> db.todos.insertOne({ text: "Increase the number of tools in my toolbelt", done: false })
+{
+	"acknowledged" : true,
+	"insertedId" : ObjectId("61a530c469caa12f4de09373")
+}
+> db.todos.find({})
+{ "_id" : ObjectId("61a3e3ec6d1f9f06cf38befe"), "text" : "Write code", "done" : true }
+{ "_id" : ObjectId("61a3e3ec6d1f9f06cf38beff"), "text" : "Learn about containers", "done" : false }
+{ "_id" : ObjectId("61a530c469caa12f4de09373"), "text" : "Increase the number of tools in my toolbelt", "done" : false }
+> exit
+bye
+root@537df4802f84:/# exit
+exit

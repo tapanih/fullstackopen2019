@@ -1,0 +1,9 @@
+tapani@tapani-desktop:$ sudo docker start -i laughing_payne
+root@365d4108e4df:/#
+root@365d4108e4df:/# apt-get update
+root@365d4108e4df:/# apt-get install -y curl
+root@365d4108e4df:/# curl -sL https://deb.nodesource.com/setup_16.x | bash
+root@365d4108e4df:/# apt install -y nodejs
+root@365d4108e4df:/# node /usr/src/app/index.js
+Hello world
+root@365d4108e4df:/# exit
